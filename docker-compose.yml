@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   db:
@@ -6,7 +6,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
-      MYSQL_DATABASE: "${DB_DATABASE}"
+      MYSQL_DATABASE: "${DB_NAME}"
       MYSQL_USER: "${DB_USER}"
       MYSQL_PASSWORD: "${DB_PASSWORD}"
     ports:
@@ -51,7 +51,7 @@ services:
   backend:
     image: aubayjobs_backend:0.0.1
     ports:
-      - "8000:8000"
+      - "8081:8081"
     depends_on:
       - db
       - rabbitmq
