@@ -1,0 +1,14 @@
+[Unit]
+Description=Start Docker containers with Docker Compose
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/root/linkedin-apps-aubay # path file docker-compose.yml
+ExecStart=/usr/local/bin/docker-compose up -d  # dir  docker-compose installation
+ExecStop=/usr/local/bin/docker-compose down
+RemainAfterExit=true
+
+[Install]
+WantedBy=multi-user.target

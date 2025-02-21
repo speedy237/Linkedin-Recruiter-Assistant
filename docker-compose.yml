@@ -1,0 +1,95 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
+      MYSQL_DATABASE: "${DB_DATABASE}"
+      MYSQL_USER: "${DB_USER}"
+      MYSQL_PASSWORD: "${DB_PASSWORD}"
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - tech_network  
+    stdin_open: true    
+    tty: true           
+
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    restart: always
+    environment:
+      RABBITMQ_DEFAULT_USER: "${RABBITMQ_USER}"
+      RABBITMQ_DEFAULT_PASS: "${RABBITMQ_PASSWORD}"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - tech_network  
+    stdin_open: true    
+    tty: true          
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_USER: "${DB_USER}"
+      PMA_PASSWORD: "${DB_PASSWORD}"
+    ports:
+      - "8080:80"
+    networks:
+      - tech_network  
+    stdin_open: true    
+    tty: true           
+
+  backend:
+    image: aubayjobs_backend:0.0.1
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - rabbitmq
+    volumes:
+      - ./backend/.env:/backend/.env
+      - backend_media:/app/backend/media
+    networks:
+      - tech_network  
+    stdin_open: true    
+    tty: true           
+
+  frontend:
+    image: aubayjobs_frontend:0.0.1
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    networks:
+      - tech_network  
+    stdin_open: true    
+    tty: true           
+
+  worker:
+    image: aubayjobs_worker:0.0.1
+    depends_on:
+      - backend
+      - rabbitmq
+    volumes:
+      - ./backend/.env:/backend/.env
+    networks:
+      - tech_network  
+    stdin_open: true    
+    tty: true           
+
+volumes:
+  mysql_data:
+  backend_media:
+
+networks:
+  tech_network:  
+    driver: bridge
