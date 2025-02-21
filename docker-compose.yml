@@ -21,6 +21,7 @@ services:
   rabbitmq:
     image: "rabbitmq:3-management"
     restart: always
+    env_file: ./backend/.env
     environment:
       RABBITMQ_DEFAULT_USER: "${RABBITMQ_USER}"
       RABBITMQ_DEFAULT_PASS: "${RABBITMQ_PASSWORD}"
@@ -35,6 +36,7 @@ services:
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     restart: always
+    env_file: ./backend/.env
     depends_on:
       - db
     environment:
