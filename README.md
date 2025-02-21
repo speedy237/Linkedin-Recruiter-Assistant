@@ -52,17 +52,21 @@ docker build -t aubayjobs_worker:0.0.1 ./workers
 #Rendre les scripts exécutables : Avant de pouvoir exécuter les fichiers .sh, tu dois leur donner des permissions d'exécution. Dans ton terminal, exécute les commandes suivantes :
 ```
 chmod +x build_frontend.sh
+```
 chmod +x build_backend.sh
+```
 chmod +x build_worker.sh
 
-#Lancer le frontend
+##Lancer le frontend
+
 ```
 ./build_frontend.sh
 
-#Lancer le backend
+##Lancer le backend
 ```
 ./build_backend.sh
-#Lancer les worker celery
+
+##Lancer les worker celery
 ```
 ./build_worker.sh
 
