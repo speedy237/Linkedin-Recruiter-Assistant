@@ -1,5 +1,5 @@
 
-# Aubay AI Recruiter Assistant
+# Linkedin AI Recruiter Assistant
 
 ## Description
 
@@ -48,7 +48,28 @@ docker build -t aubayjobs_frontend:0.0.1 ./frontend
 
 # Construire l'image worker
 docker build -t aubayjobs_worker:0.0.1 ./workers
+## Construire les images a partir des fichier .sh
+#Rendre les scripts exécutables : Avant de pouvoir exécuter les fichiers .sh, tu dois leur donner des permissions d'exécution. Dans ton terminal, exécute les commandes suivantes :
 ```
+chmod +x build_frontend.sh
+chmod +x build_backend.sh
+chmod +x build_worker.sh
+
+#Lancer le frontend
+```
+./build_frontend.sh
+
+#Lancer le backend
+```
+./build_backend.sh
+#Lancer les worker celery
+```
+./build_worker.sh
+
+
+
+
+
 
 ### Étape 2 : Lancer Docker Compose
 
@@ -142,16 +163,6 @@ Le fichier `start_docker_containers.sh` est un script qui peut être utilisé po
 
 Cela lancera tous les conteneurs définis dans `docker-compose.yml` et affichera la liste des conteneurs en cours d'exécution.
 
-## Contribution
 
-Les contributions sont les bienvenues ! Si vous souhaitez contribuer à ce projet, veuillez suivre ces étapes :
 
-1. Forkez le projet.
-2. Créez une branche pour votre fonctionnalité (`git checkout -b feature/AmazingFeature`).
-3. Commitez vos modifications (`git commit -m 'Add some AmazingFeature'`).
-4. Poussez vers la branche (`git push origin feature/AmazingFeature`).
-5. Ouvrez une Pull Request.
 
-## Licence
-
-Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
