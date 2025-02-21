@@ -75,7 +75,7 @@ services:
     tty: true           
 
   worker:
-    image: aubayjobs_worker:0.0.1
+    image: worker_image:0.0.1
     depends_on:
       - backend
       - rabbitmq

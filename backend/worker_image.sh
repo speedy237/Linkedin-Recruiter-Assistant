@@ -4,6 +4,6 @@
 echo "Building worker image..."
 
 # Accéder au répertoire workers et construire l'image
-docker build -t aubayjobs_worker:0.0.1 ./workers
+docker build -t aubayjobs_worker:0.0.1  worker.Dockerfile
 
 echo "Worker image built successfully!"
